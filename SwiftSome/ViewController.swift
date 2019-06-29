@@ -12,7 +12,7 @@ class ViewController: UITabBarController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        var one = OneViewController()
+        //MARK:设置三个tabbar
         let one = UINavigationController(rootViewController: OneViewController())
         one.tabBarItem = UITabBarItem(title: "One", image: UIImage(named: ""), selectedImage: UIImage(named: ""))
         
@@ -21,6 +21,8 @@ class ViewController: UITabBarController{
         
         let three = UINavigationController(rootViewController: ThreeViewController())
         three.tabBarItem = UITabBarItem(title: "Three", image: UIImage(named: ""), selectedImage: UIImage(named: ""))
+        
+        //MARK:添加到视图
         self.viewControllers = [one,two,three]
         
         

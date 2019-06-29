@@ -33,7 +33,6 @@ class OneViewController: UIViewController  , UITableViewDelegate , UITableViewDa
         //MARK:导航条左侧按钮
         let LeftBtn = UIBarButtonItem(title: "左侧带输入框按钮", style: .plain, target: self, action: #selector(leftbtn))
         self.navigationItem.leftBarButtonItem = LeftBtn
-        // Do any additional setup after loading the view, typically from a nib.
     }
     //MARK:设置表格多少分区等
     //多少分区
@@ -51,24 +50,38 @@ class OneViewController: UIViewController  , UITableViewDelegate , UITableViewDa
         if (cell == nil) {
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
          }
+        //cell右侧的 “  >  ”
         cell?.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        //cell的选择样式
         cell?.selectionStyle = UITableViewCell.SelectionStyle.none
+        //设置cell的主标题
         cell?.textLabel?.text = Arr[indexPath.row];
         return cell!
     }
+    //MARK:表格的点击方法
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             self.navigationController?.pushViewController(One_TwoViewController(), animated: true)
         }
     }
+    //MARK:表格头文字
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let String = "头文字"
+        return String
+        
+    }
     //MARK:右侧按钮点击的方法,底侧弹出,点击确定后维持1秒文字
     @objc func rightbtn() -> Void {
-        //MARK:弹出框,新版
+        //MARK:弹出框,新版。
+        //  actionSheet为下部展示 , alert为中部展示
         let alert = UIAlertController(title: "点击了导航条右侧按钮", message: nil, preferredStyle: .actionSheet)
-        //添加弹出框按钮
+        //添加弹出框按钮   .ccancel为取消按钮
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (UIAlertAction) in
+            //设置一个弹窗 , 1秒后消失
             let alertControlle = UIAlertController(title: "好的,你很棒", message: nil, preferredStyle: .alert)
+            
             self.present(alertControlle, animated: true, completion: nil)
+            //。设置1秒后消失
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: {
                 self.presentedViewController?.dismiss(animated: true, completion: nil)
             })
